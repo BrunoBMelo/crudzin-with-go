@@ -1,0 +1,7 @@
+.gitignore
+kubernetes-deployment.yaml
+README.md
+.vscode/
+docker-compose.yaml
+Dockerfile
+init.sql

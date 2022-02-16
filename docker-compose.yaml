@@ -1,7 +1,12 @@
 version: '3'
+networks:
+  db:
+    driver: bridge
 services:
   postgres:
       image: postgres:alpine
+      networks:
+        - db
       restart: always
       container_name: golang-crud
       volumes:

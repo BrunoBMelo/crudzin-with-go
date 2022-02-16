@@ -2,6 +2,7 @@ package routes
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -16,6 +17,7 @@ type Customer struct {
 
 func (c *Customer) Post(w http.ResponseWriter, r *http.Request) {
 
+	fmt.Println("POST")
 	var model model.Customer
 
 	json.NewDecoder(r.Body).Decode(&model)
@@ -31,7 +33,7 @@ func (c *Customer) Post(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *Customer) Get(w http.ResponseWriter, r *http.Request) {
-
+	fmt.Println("GET")
 	customers, err := c.customerService.GetAll()
 
 	if err != nil {
@@ -44,7 +46,7 @@ func (c *Customer) Get(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *Customer) FindById(w http.ResponseWriter, r *http.Request) {
-
+	fmt.Println("GETID")
 	params := mux.Vars(r)
 
 	id, err := strconv.ParseInt(params["id"], 10, 64)
@@ -71,7 +73,7 @@ func (c *Customer) FindById(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *Customer) Delete(w http.ResponseWriter, r *http.Request) {
-
+	fmt.Println("DEL")
 	params := mux.Vars(r)
 
 	id, err := strconv.ParseInt(params["id"], 10, 64)
@@ -92,7 +94,7 @@ func (c *Customer) Delete(w http.ResponseWriter, r *http.Request) {
 }
 
 func (c *Customer) Update(w http.ResponseWriter, r *http.Request) {
-
+	fmt.Println("UPD")
 	params := mux.Vars(r)
 
 	id, err := strconv.ParseInt(params["id"], 10, 64)

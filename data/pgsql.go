@@ -2,6 +2,7 @@ package data
 
 import (
 	"database/sql"
+	"time"
 
 	_ "github.com/lib/pq"
 )
@@ -13,6 +14,9 @@ type postgreSql struct {
 
 func (p *postgreSql) GetConnection() *sql.DB {
 	if db, err := sql.Open(p.provider, p.dataSource); err == nil {
+		db.SetMaxIdleConns(100)
+		db.SetMaxOpenConns(100)
+		db.SetConnMaxLifetime(1 * time.Nanosecond)
 		return db
 	} else {
 		panic(err)

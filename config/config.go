@@ -19,6 +19,12 @@ func Load() *Config {
 			ProviderName:     os.Getenv("PROVIDERNAME"),
 			PORT:             os.Getenv("APP_PORT"),
 		}
+	} else {
+		return &Config{
+			StringConnection: "host=localhost port=5432 user=PG_USERGO password=PG_PWD2017 dbname=PG_DBGO sslmode=disable",
+			ProviderName:     "postgres",
+			PORT:             "3001",
+		}
 	}
-	panic("Erro when to load .env file")
+	//panic("Erro when to load .env file")
 }
