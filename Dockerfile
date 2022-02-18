@@ -1,11 +1,13 @@
-FROM golang:latest as build
+FROM golang:1.17-alpine as build
 WORKDIR /app
+
+COPY go.mod go.sum ./
+RUN go mod download && go mod verify
+
 COPY . .
-RUN GCO_ENABLED=0 GOOS=linux go build -ldflags "-s -w" -a -installsuffix cgo -o main
+RUN CGO_ENABLED=0 go build -ldflags "-s -w" -installsuffix cgo -o /cmd/app
 
-FROM scratch as final
-WORKDIR /app
-COPY --from=build /app/main .
-
+FROM gcr.io/distroless/static
+COPY --from=build /cmd/app /
 EXPOSE 3001
-CMD [ "./main" ]
+CMD ["/app"]
