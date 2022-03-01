@@ -1,8 +1,8 @@
 package service
 
 import (
-	"brunomelo.crud/v1/data"
-	"brunomelo.crud/v1/model"
+	"brunomelo.crud/v1/internal/data"
+	"brunomelo.crud/v1/pkg/model"
 )
 
 type Customer struct {

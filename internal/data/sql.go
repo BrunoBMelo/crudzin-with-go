@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"log"
 
-	"brunomelo.crud/v1/model"
+	"brunomelo.crud/v1/pkg/model"
 )
 
 type SqlProvider interface {

@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"brunomelo.crud/v1/model"
-	"brunomelo.crud/v1/service"
+	"brunomelo.crud/v1/pkg/model"
+	"brunomelo.crud/v1/pkg/service"
 	"github.com/gorilla/mux"
 )
 
@@ -125,6 +125,6 @@ func (c *Customer) Update(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(model)
 }
 
-func NewCustomerRoute(service *service.Customer) *Customer {
+func New(service *service.Customer) *Customer {
 	return &Customer{customerService: service}
 }

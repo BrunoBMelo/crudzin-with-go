@@ -26,5 +26,4 @@ func Load() *Config {
 			PORT:             os.Getenv("APP_PORT"),
 		}
 	}
-	//panic("Erro when to load .env file")
 }

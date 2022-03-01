@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"brunomelo.crud/v1/routes"
+	"brunomelo.crud/v1/internal/routes"
 )
 
 func main() {

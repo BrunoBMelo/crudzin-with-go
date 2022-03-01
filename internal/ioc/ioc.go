@@ -1,9 +1,9 @@
 package ioc
 
 import (
-	"brunomelo.crud/v1/config"
-	"brunomelo.crud/v1/data"
-	"brunomelo.crud/v1/service"
+	"brunomelo.crud/v1/internal/config"
+	"brunomelo.crud/v1/internal/data"
+	"brunomelo.crud/v1/pkg/service"
 )
 
 type containerDI struct {
@@ -14,7 +14,7 @@ type containerDI struct {
 func (di *containerDI) register() {
 
 	di.Config = config.Load()
-	sqlProvider := data.NewPostgreSql(di.Config.ProviderName, di.Config.StringConnection)
+	sqlProvider := data.New(di.Config.ProviderName, di.Config.StringConnection)
 	sqlHandler := data.NewSqlHanlder(sqlProvider)
 	di.CustomerServices = service.NewCustomerService(sqlHandler)
 }

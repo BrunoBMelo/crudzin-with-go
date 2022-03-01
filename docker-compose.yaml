@@ -1,19 +1,24 @@
-version: '3'
+version: '3.1'
+
 networks:
-  db:
+  crudzin:
     driver: bridge
+
+volumes:
+  crudzindb:
+
 services:
   postgres:
-      image: postgres:alpine
-      networks:
-        - db
-      restart: always
-      container_name: golang-crud
-      volumes:
-        - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-      environment:
-        POSTGRES_DB: ${POSTGRES_DB}
-        POSTGRES_USER: ${POSTGRES_USER}
-        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      ports:
-        - ${POSTGRES_PORT_EXPOSE}:${POSTGRES_PORT}
+    image: postgres:alpine
+    restart: always
+    container_name: golang-crud
+    volumes:
+      - crudzin:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - ${POSTGRES_PORT_EXPOSE}:${POSTGRES_PORT}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    networks:
+      - crudzin

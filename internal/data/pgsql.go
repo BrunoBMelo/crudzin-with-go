@@ -23,6 +23,6 @@ func (p *postgreSql) GetConnection() *sql.DB {
 	}
 }
 
-func NewPostgreSql(provider string, dataSource string) *postgreSql {
+func New(provider string, dataSource string) *postgreSql {
 	return &postgreSql{provider: provider, dataSource: dataSource}
 }

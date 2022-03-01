@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"brunomelo.crud/v1/ioc"
-	"brunomelo.crud/v1/middleware"
+	"brunomelo.crud/v1/internal/ioc"
+	"brunomelo.crud/v1/internal/middleware"
 	"github.com/gorilla/mux"
 )
 
@@ -17,7 +17,7 @@ func RouterHandlers() {
 
 	dip := ioc.NewContainerDI()
 
-	customer := NewCustomerRoute(dip.CustomerServices)
+	customer := New(dip.CustomerServices)
 	config := dip.Config
 
 	router.HandleFunc("/api/customer", customer.Get).Methods("GET")
@@ -31,5 +31,5 @@ func RouterHandlers() {
 }
 
 func middlewareSetup(r *mux.Router) {
-	r.Use(middleware.ContentyTypeMiddleware)
+	r.Use(middleware.SetContentTypesAllowed)
 }
